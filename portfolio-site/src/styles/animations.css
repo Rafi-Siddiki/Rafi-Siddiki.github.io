@@ -1,0 +1,186 @@
+/* Shared background layer */
+.animated-background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1; /* sits behind content inside the isolated .app */
+  background: var(--bg);
+  transition: background-color 0.4s ease;
+}
+
+/* Creates a stacking context so z-index: -1 stays inside .app */
+.app {
+  position: relative;
+  isolation: isolate;
+}
+
+/* =========================
+   DEFAULT: Floating particles
+   (left/top are set inline from React)
+   ========================= */
+
+.particle-field {
+  position: absolute;
+  inset: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.25;
+
+  animation: particle-float 9s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.5s);
+}
+
+@keyframes particle-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.15;
+  }
+
+  50% {
+    transform: translate3d(12px, -24px, 0);
+    opacity: 0.5;
+  }
+}
+
+/* =========================
+   MINECRAFT: Floating blocks
+   (left/top are set inline from React)
+   ========================= */
+
+.block-field {
+  position: absolute;
+  inset: 0;
+  perspective: 800px;
+}
+
+.minecraft-block {
+  position: absolute;
+  width: clamp(22px, 3vw, 42px);
+  aspect-ratio: 1;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 3px;
+  opacity: 0.12;
+
+  animation: block-float 12s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.9s);
+}
+
+/* Grass-inspired blocks */
+.block-0 {
+  background: linear-gradient(#83b94e 0 25%, #765033 25% 100%);
+  box-shadow: 0 0 18px rgb(131 185 78 / 10%);
+}
+
+/* Stone-inspired blocks */
+.block-1 {
+  background: repeating-linear-gradient(
+    45deg,
+    #929a92 0 5px,
+    #747d74 5px 10px
+  );
+}
+
+/* Diamond-inspired blocks */
+.block-2 {
+  background: #49b8ad;
+  box-shadow: 0 0 20px rgb(73 184 173 / 15%);
+}
+
+@keyframes block-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg);
+  }
+
+  50% {
+    transform: translate3d(10px, -24px, 0) rotateX(18deg) rotateY(28deg);
+  }
+}
+
+/* =========================
+   CYBERPUNK: Neon grid
+   ========================= */
+
+.cyberpunk-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.neon-grid {
+  position: absolute;
+  left: -50%;
+  bottom: -35%;
+  width: 200%;
+  height: 80%;
+
+  background-image:
+    linear-gradient(rgb(0 245 255 / 14%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(0 245 255 / 14%) 1px, transparent 1px);
+
+  background-size: 48px 48px;
+  transform: perspective(300px) rotateX(55deg);
+  transform-origin: center top;
+
+  animation: grid-pulse 5s ease-in-out infinite;
+}
+
+.neon-glow {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  max-width: 500px;
+  max-height: 500px;
+  border-radius: 50%;
+  top: 15%;
+  right: -10%;
+
+  background: rgb(157 78 221 / 12%);
+  filter: blur(80px);
+  will-change: transform;
+
+  animation: glow-drift 10s ease-in-out infinite alternate;
+}
+
+@keyframes grid-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes glow-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-35px, 20px, 0);
+  }
+}
+
+/* Accessibility: respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .particle,
+  .minecraft-block,
+  .neon-grid,
+  .neon-glow {
+    animation: none;
+  }
+
+  .neon-glow {
+    display: none;
+  }
+}
