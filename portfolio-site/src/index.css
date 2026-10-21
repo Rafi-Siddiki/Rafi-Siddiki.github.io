@@ -26,20 +26,16 @@ body {
 
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  z-index: 1000;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-
   padding: 18px 5%;
   background: var(--bg);
-  border-bottom: 1px solid var(--accent);
+  border-radius: 0 0 12px 12px;
+  border: 2px solid var(--surface);
+  margin-top: 10px
 }
 
 .logo {
@@ -53,7 +49,13 @@ body {
   color: var(--accent);
 }
 
-.nav-links,
+.nav-links{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
 .theme-switcher {
   display: flex;
   align-items: center;
@@ -64,25 +66,38 @@ body {
 .nav-links a {
   color: var(--muted);
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 
 .nav-links a:hover {
   color: var(--accent);
 }
 
+.nav-links a.active {
+  color: var(--accent);
+  font-weight: bold;
+}
+
 .theme-switcher button {
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid transparent;
-  padding: 8px 10px;
-  border-radius: 8px;
+  background: none;
+  border: none;
   cursor: pointer;
-  font: inherit;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-switcher button img {
+  width: 20px;  /* Adjust size as needed */
+  height: 20px;
+  object-fit: contain;
 }
 
 .theme-switcher button.active {
-  border-color: var(--accent);
-  color: var(--accent);
+  /* e.g., add a border, background, or glow effect */
+  background: var(--muted);
+  border-radius: 4px;
 }
 
 .section {
