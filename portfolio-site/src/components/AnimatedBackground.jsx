@@ -1,6 +1,13 @@
-function AnimatedBackground({ theme }) {
+
+import "../styles/animations.css";
+
+function AnimatedBackground({ theme = "default" }) {
   return (
-    <div className="animated-background" aria-hidden="true">
+    <div
+      className={`animated-background theme-${theme}`}
+      aria-hidden="true"
+    >
+      {/* DEFAULT: Floating particles */}
       {theme === "default" && (
         <div className="particle-field">
           {Array.from({ length: 24 }, (_, i) => (
@@ -17,26 +24,35 @@ function AnimatedBackground({ theme }) {
         </div>
       )}
 
+      {/* MINECRAFT: Animated GIF */}
       {theme === "minecraft" && (
-        <div className="block-field">
-          {Array.from({ length: 12 }, (_, i) => (
-            <div
-              key={i}
-              className={`minecraft-block block-${i % 3}`}
-              style={{
-                "--i": i,
-                left: `${(i * 31 + 5) % 100}%`,
-                top: `${(i * 43 + 12) % 100}%`,
-              }}
-            />
-          ))}
-        </div>
+        <img
+          className="background-gif minecraft-gif"
+          src="/videos/minecraft.gif"
+          alt=""
+        />
       )}
 
+      {/* CYBERPUNK: Animated GIF */}
       {theme === "cyberpunk" && (
-        <div className="cyberpunk-field">
-          <div className="neon-grid" />
-          <div className="neon-glow" />
+        <img
+          className="background-gif cyberpunk-gif"
+          src="/videos/cyberpunk.gif"
+          alt=""
+        />
+      )}
+
+      {/* Dark overlay for readability */}
+      {(theme === "minecraft" || theme === "cyberpunk") && (
+        <div className="background-overlay" />
+      )}
+
+      {/* CYBERPUNK: Additional neon atmosphere */}
+      {theme === "cyberpunk" && (
+        <div className="cyberpunk-atmosphere">
+          <div className="cyberpunk-glow cyberpunk-glow-one" />
+          <div className="cyberpunk-glow cyberpunk-glow-two" />
+          <div className="cyberpunk-scanlines" />
         </div>
       )}
     </div>
