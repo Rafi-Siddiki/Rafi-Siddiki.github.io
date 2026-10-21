@@ -54,7 +54,7 @@ function Navbar({ theme, setTheme }) {
       </nav>
 
       <div className="theme-switcher">
-        {THEMES.map(({ id, label, icon }) => (
+        {THEMES.map(({ id, icon }) => (
           <button
             key={id}
             type="button"
