@@ -1,5 +1,5 @@
 
-name: Deploy portfolio to GitHub Pages
+name: Deploy React portfolio
 
 on:
   push:
@@ -20,10 +20,11 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
       - name: Set up Node.js
@@ -31,20 +32,23 @@ jobs:
         with:
           node-version: lts/*
           cache: npm
+          cache-dependency-path: portfolio-site/package-lock.json
 
       - name: Install dependencies
+        working-directory: portfolio-site
         run: npm ci
 
-      - name: Build website
+      - name: Build React website
+        working-directory: portfolio-site
         run: npm run build
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
 
-      - name: Upload website files
+      - name: Upload built website
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
         with:
-          path: ./dist
+          path: portfolio-site/dist
 
       - name: Deploy website
         id: deployment
