@@ -1,8 +1,11 @@
 import { useState } from "react";
+import Home from "./sections/Home";
+import About from "./sections/About";
 import AnimatedBackground from "./components/AnimatedBackground";
 import "./styles/animations.css";
 import Navbar from "./components/Navbar";
 import './App.css'
+import Projects from "./sections/Projects";
 
 function App() {
   const [theme, setTheme] = useState("default");
@@ -14,25 +17,15 @@ function App() {
 
       <main>
         <section id="home" className="section hero">
-          <p>WELCOME TO MY PORTFOLIO</p>
-          <h1>Hi, I'm Rafi.</h1>
-          <h2>I build things for the web.</h2>
-          <p>
-            Computer Science graduate exploring software
-            development and creating useful projects.
-          </p>
+          <Home />
         </section>
 
         <section id="projects" className="section">
-          <h2>My Projects</h2>
-        </section>
-
-        <section id="goals" className="section">
-          <h2>My Goals</h2>
+          <Projects />
         </section>
 
         <section id="about" className="section">
-          <h2>About Me</h2>
+          <About />
         </section>
 
         <section id="contact" className="section">

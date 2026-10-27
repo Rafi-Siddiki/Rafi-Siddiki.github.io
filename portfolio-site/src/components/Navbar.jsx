@@ -42,9 +42,6 @@ function Navbar({ theme, setTheme }) {
         <a href="#projects" className={activeSection === "projects" ? "active" : ""}>
           Projects
         </a>
-        <a href="#goals" className={activeSection === "goals" ? "active" : ""}>
-          Goals
-        </a>
         <a href="#about" className={activeSection === "about" ? "active" : ""}>
           About Me
         </a>
