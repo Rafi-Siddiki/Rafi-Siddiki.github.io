@@ -253,3 +253,46 @@
   }
 }
 
+/* Initial, hidden state */
+.scroll-reveal {
+  width: 100%;
+  opacity: 0;
+
+  transition:
+    opacity var(--reveal-duration, 700ms) ease,
+    transform var(--reveal-duration, 700ms) ease;
+
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Starting positions based on the chosen direction */
+.scroll-reveal[data-direction="up"] {
+  transform: translateY(40px);
+}
+
+.scroll-reveal[data-direction="down"] {
+  transform: translateY(-40px);
+}
+
+.scroll-reveal[data-direction="left"] {
+  transform: translateX(40px);
+}
+
+.scroll-reveal[data-direction="right"] {
+  transform: translateX(-40px);
+}
+
+/* Visible state */
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

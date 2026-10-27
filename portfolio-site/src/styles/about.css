@@ -1,25 +1,76 @@
+
+/* =========================
+   ABOUT SECTION
+   ========================= */
+
 .about-section {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
-  gap: 30px;
-  padding: 0;
-  margin: 120px auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(160px, 0.7fr);
+  grid-template-areas: "text intro";
+  align-items: start;
+  gap: clamp(24px, 5vw, 72px);
 
-
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
+
+/* Paragraph on the left */
 
 .about-text {
-  max-width: 900px;
-  text-align: center;
-  opacity: 0;
-  animation: textEntrance 1s forwards;
-  animation-delay: 0.3s;
+  grid-area: text;
+  min-width: 0;
+  text-align: left;
 }
 
+.about-text p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.9;
+  overflow-wrap: break-word;
+}
+
+/* Heading on the right */
+
 .about-intro {
-  opacity: 0;
-  animation: textEntrance 1s forwards;
+  grid-area: intro;
+  text-align: right;
+}
+
+.about-intro h2 {
+  margin: 0;
+  color: var(--accent);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.15;
+  overflow-wrap: break-word;
+}
+
+/* =========================
+   TABLETS AND PHONES
+   ========================= */
+
+@media (max-width: 768px) {
+  .about-section {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "intro"
+      "text";
+    gap: 20px;
+    padding: 10px 0;
+  }
+
+  .about-intro {
+    text-align: left;
+  }
+
+  .about-intro h2 {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+  }
+
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
 }

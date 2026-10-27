@@ -1,10 +1,19 @@
-
 @import "./styles/themes.css";
 
+/* Fixed typo: changed '-' to '*' */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* Set background on html & body so Safari overscroll isn't white */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  overscroll-behavior: none; /* Stops the elastic white bounce in Safari */
 }
 
 html {
@@ -17,7 +26,7 @@ body {
 }
 
 .app {
-  min-height: 100vh;
+  min-height: 100dvh; /* Changed from 100vh to 100dvh for mobile Safari */
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
@@ -35,7 +44,7 @@ body {
   background: var(--bg);
   border-radius: 0 0 12px 12px;
   border: 2px solid var(--surface);
-  margin-top: 10px
+  margin-top: 10px;
 }
 
 .logo {
@@ -49,7 +58,7 @@ body {
   color: var(--accent);
 }
 
-.nav-links{
+.nav-links {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -89,19 +98,18 @@ body {
 }
 
 .theme-switcher button img {
-  width: 20px;  /* Adjust size as needed */
+  width: 20px;
   height: 20px;
   object-fit: contain;
 }
 
 .theme-switcher button.active {
-  /* e.g., add a border, background, or glow effect */
   background: var(--muted);
   border-radius: 4px;
 }
 
 .section {
-  min-height: 100vh;
+  min-height: 100dvh; /* Changed from 100vh to 100dvh */
   padding: 130px 8% 60px;
   scroll-margin-top: 90px;
 }
@@ -111,7 +119,6 @@ body {
   font-size: 2rem;
   margin-bottom: 20px;
 }
-
 
 @media (max-width: 900px) {
   .navbar {
