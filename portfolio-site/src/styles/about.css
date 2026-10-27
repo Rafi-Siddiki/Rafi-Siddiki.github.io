@@ -1,14 +1,10 @@
 
-/* =========================
-   ABOUT SECTION
-   ========================= */
-
 .about-section {
   display: grid;
-  grid-template-columns: minmax(0, 1.8fr) minmax(160px, 0.7fr);
+  grid-template-columns: minmax(0, 1.65fr) minmax(180px, 0.75fr);
   grid-template-areas: "text intro";
   align-items: start;
-  gap: clamp(24px, 5vw, 72px);
+  gap: clamp(28px, 5vw, 72px);
 
   width: 100%;
   max-width: 1100px;
@@ -16,27 +12,29 @@
   padding: 20px 0;
 }
 
-/* Paragraph on the left */
-
 .about-text {
   grid-area: text;
   min-width: 0;
-  text-align: left;
 }
 
-.about-text p {
-  margin: 0;
+.about-text > p {
+  margin: 0 0 20px;
   color: var(--muted);
-  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  font-size: 1rem;
   line-height: 1.9;
-  overflow-wrap: break-word;
 }
-
-/* Heading on the right */
 
 .about-intro {
   grid-area: intro;
   text-align: right;
+}
+
+.about-eyebrow {
+  margin-bottom: 10px;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 .about-intro h2 {
@@ -44,12 +42,78 @@
   color: var(--accent);
   font-size: clamp(2rem, 4vw, 3.5rem);
   line-height: 1.15;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
-/* =========================
-   TABLETS AND PHONES
-   ========================= */
+/* Education, experience and research */
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 32px 0;
+}
+
+.about-highlight {
+  min-width: 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--surface);
+}
+
+.about-highlight h3,
+.about-skills > h3 {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: 1.05rem;
+}
+
+.about-highlight p {
+  margin: 0 0 8px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.about-highlight span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.about-highlight-wide {
+  grid-column: 1 / -1;
+}
+
+/* Skills */
+
+.about-skills {
+  margin-top: 34px;
+}
+
+.about-skill-group {
+  margin-top: 20px;
+}
+
+.about-skill-group h4 {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.about-skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.about-skill-tags span {
+  padding: 7px 10px;
+  border: 1px solid var(--surface);
+  border-radius: 7px;
+  color: var(--text);
+  font-size: 0.85rem;
+}
+
+/* Mobile */
 
 @media (max-width: 768px) {
   .about-section {
@@ -57,7 +121,7 @@
     grid-template-areas:
       "intro"
       "text";
-    gap: 20px;
+    gap: 24px;
     padding: 10px 0;
   }
 
@@ -65,12 +129,17 @@
     text-align: left;
   }
 
-  .about-intro h2 {
-    font-size: clamp(2rem, 7vw, 2.75rem);
+  .about-highlights {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-highlights {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .about-text p {
-    font-size: 1rem;
-    line-height: 1.8;
+  .about-highlight-wide {
+    grid-column: auto;
   }
 }

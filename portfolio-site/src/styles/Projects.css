@@ -1,0 +1,38 @@
+
+.projects-section {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.projects-heading {
+  max-width: 700px;
+  margin-bottom: 28px;
+}
+
+.projects-grid {
+  display: grid;
+
+  /* Limit each card to 300px */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, 260px), 300px)
+  );
+
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    gap: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+}

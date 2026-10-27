@@ -1,0 +1,280 @@
+
+/* =========================
+   PROJECT CARD
+   ========================= */
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+  border: 1px solid var(--surface);
+  border-radius: 14px;
+
+  background: var(--surface);
+  color: var(--text);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Subtle hover effect */
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+}
+
+.project-card:focus-within {
+  border-color: var(--accent);
+}
+
+
+/* =========================
+   PROJECT IMAGE
+   ========================= */
+
+.project-card__media {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 16 / 8.5;
+  overflow: hidden;
+
+  background: var(--bg);
+}
+
+.project-card__media img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-card__media img {
+  transform: scale(1.03);
+}
+
+
+/* =========================
+   IMAGE PLACEHOLDER
+   Used when no image is provided
+   ========================= */
+
+.project-card__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(
+    135deg,
+    var(--surface),
+    var(--bg)
+  );
+
+  color: var(--accent);
+}
+
+.project-card__placeholder-mark {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -3px;
+}
+
+.project-card__placeholder-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+
+/* =========================
+   CARD CONTENT
+   ========================= */
+
+.project-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+
+  min-width: 0;
+  padding: 16px;
+}
+
+/* Optional project status */
+
+.project-card__status {
+  margin: 0 0 8px;
+
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+/* Project title */
+
+.project-card__title {
+  margin: 0 0 8px;
+
+  color: var(--text);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.35;
+
+  overflow-wrap: anywhere;
+}
+
+/* Project description */
+
+.project-card__description {
+  margin: 0;
+
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   TECHNOLOGY TAGS
+   ========================= */
+
+.project-card__technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  margin: 14px 0 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.project-card__technologies li {
+  padding: 5px 8px;
+
+  border: 1px solid var(--accent);
+  border-radius: 5px;
+
+  color: var(--accent);
+  font-size: 0.75rem;
+  line-height: 1.3;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   PROJECT LINKS
+   ========================= */
+
+.project-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+
+  width: 100%;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.project-card__actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+
+  overflow-wrap: anywhere;
+
+  transition: opacity 0.2s ease;
+}
+
+.project-card__actions a:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+
+/* =========================
+   KEYBOARD ACCESSIBILITY
+   ========================= */
+
+.project-card a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 3px;
+}
+
+
+/* =========================
+   SMALL SCREENS
+   ========================= */
+
+@media (max-width: 480px) {
+  .project-card {
+    border-radius: 12px;
+  }
+
+  .project-card__body {
+    padding: 14px;
+  }
+
+  .project-card__title {
+    font-size: 1.1rem;
+  }
+
+  .project-card__description {
+    font-size: 0.9rem;
+  }
+
+  .project-card__actions {
+    gap: 12px;
+  }
+}
+
+
+/* =========================
+   REDUCED MOTION
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-card__media img,
+  .project-card__actions a {
+    transition: none;
+  }
+
+  .project-card:hover,
+  .project-card:hover .project-card__media img {
+    transform: none;
+  }
+}

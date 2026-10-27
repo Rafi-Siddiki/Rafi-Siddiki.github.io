@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Home from "./sections/Home";
 import About from "./sections/About";
 import Projects from "./sections/Projects";
+import Contact from "./sections/Contact";
 
 import AnimatedBackground from "./components/AnimatedBackground";
 import ScrollReveal from "./components/ScrollReveal";
@@ -72,7 +73,7 @@ function App() {
         {/* Contact Section */}
         <section id="contact" className="section">
           <ScrollReveal direction="up">
-            <h2>Contact Me</h2>
+            <Contact />
           </ScrollReveal>
         </section>
       </main>
