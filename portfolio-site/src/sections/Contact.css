@@ -107,10 +107,6 @@
 /* Respect reduced-motion preferences */
 
 @media (prefers-reduced-motion: reduce) {
-  .contact-social-link {
-    transition: none;
-  }
-
   .contact-social-link:hover {
     transform: none;
   }

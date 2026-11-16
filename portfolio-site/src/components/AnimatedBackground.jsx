@@ -1,54 +1,50 @@
+import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion";
+import "./AnimatedBackground.css";
 
-import "../styles/animations.css";
+const PARTICLE_COUNT = 24;
 
-function AnimatedBackground({ theme = "default" }) {
+function ParticleField() {
   return (
-    <div
-      className={`animated-background theme-${theme}`}
-      aria-hidden="true"
-    >
-      {/* DEFAULT: Floating particles */}
-      {theme === "default" && (
-        <div className="particle-field">
-          {Array.from({ length: 24 }, (_, i) => (
-            <span
-              key={i}
-              className="particle"
-              style={{
-                "--i": i,
-                left: `${(i * 37 + 11) % 100}%`,
-                top: `${(i * 53 + 7) % 100}%`,
-              }}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* MINECRAFT: Animated GIF */}
-      {theme === "minecraft" && (
-        <img
-          className="background-gif minecraft-gif"
-          src="/videos/minecraft.gif"
-          alt=""
+    <div className="particle-field">
+      {Array.from({ length: PARTICLE_COUNT }, (_, i) => (
+        <span
+          key={i}
+          className="particle"
+          style={{
+            "--i": i,
+            left: `${(i * 37 + 11) % 100}%`,
+            top: `${(i * 53 + 7) % 100}%`,
+          }}
         />
+      ))}
+    </div>
+  );
+}
+
+function AnimatedBackground({ theme }) {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const media = theme.background;
+
+  return (
+    <div className="animated-background" aria-hidden="true">
+      {!media && <ParticleField />}
+
+      {media && (
+        <>
+          {/* Reduced-motion users get a still frame and never download the animation. */}
+          <img
+            key={theme.id}
+            className={`background-media background-media--${theme.id}`}
+            src={prefersReducedMotion ? media.poster : media.src}
+            alt=""
+            decoding="async"
+            style={{ backgroundImage: `url(${media.poster})` }}
+          />
+          <div className="background-overlay" />
+        </>
       )}
 
-      {/* CYBERPUNK: Animated GIF */}
-      {theme === "cyberpunk" && (
-        <img
-          className="background-gif cyberpunk-gif"
-          src="/videos/cyberpunk.gif"
-          alt=""
-        />
-      )}
-
-      {/* Dark overlay for readability */}
-      {(theme === "minecraft" || theme === "cyberpunk") && (
-        <div className="background-overlay" />
-      )}
-
-      {/* CYBERPUNK: Additional neon atmosphere */}
-      {theme === "cyberpunk" && (
+      {theme.id === "cyberpunk" && (
         <div className="cyberpunk-atmosphere">
           <div className="cyberpunk-glow cyberpunk-glow-one" />
           <div className="cyberpunk-glow cyberpunk-glow-two" />

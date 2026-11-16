@@ -1,27 +1,23 @@
-
 import { useState } from "react";
-import {
-  FaEnvelope,
-  FaFacebookF,
-  FaInstagram,
-  FaGithub,
-  FaLinkedinIn,
-  FaDiscord,
-} from "react-icons/fa";
 
-import "../styles/Contact.css";
+import { DISCORD_LINK, DISCORD_USERNAME, SOCIAL_LINKS } from "../data/socials";
+import "./Contact.css";
 
 function Contact() {
   const [discordMessage, setDiscordMessage] = useState("");
 
   async function copyDiscordUsername() {
     try {
-      await navigator.clipboard.writeText(".rafi.");
-      setDiscordMessage("Discord username copied: .rafi.");
+      await navigator.clipboard.writeText(DISCORD_USERNAME);
+      setDiscordMessage(`Discord username copied: ${DISCORD_USERNAME}`);
     } catch {
-      setDiscordMessage("Your Discord username is .rafi. You can copy it manually.");
+      setDiscordMessage(
+        `My Discord username is ${DISCORD_USERNAME} — you can copy it manually.`
+      );
     }
   }
+
+  const { Icon: DiscordIcon } = DISCORD_LINK;
 
   return (
     <div className="contact-section">
@@ -34,78 +30,35 @@ function Contact() {
         Connect with me through any of the platforms below.
       </p>
 
-      <div className="contact-socials" aria-label="Contact and social profiles">
-        {/* Email */}
-        <a
-          className="contact-social-link"
-          href="mailto:rafisiddiki2k@gmail.com"
-          aria-label="Send me an email"
-          title="Email"
-        >
-          <FaEnvelope />
-        </a>
+      <div className="contact-socials" role="group" aria-label="Contact and social profiles">
+        {SOCIAL_LINKS.map(({ id, title, ariaLabel, href, Icon }) => {
+          const isExternal = href.startsWith("http");
+          return (
+            <a
+              key={id}
+              className="contact-social-link"
+              href={href}
+              aria-label={ariaLabel}
+              title={title}
+              {...(isExternal && { target: "_blank", rel: "noopener noreferrer" })}
+            >
+              <Icon />
+            </a>
+          );
+        })}
 
-        {/* Facebook */}
-        <a
-          className="contact-social-link"
-          href="https://www.facebook.com/rafi.siddik.1/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Facebook profile"
-          title="Facebook"
-        >
-          <FaFacebookF />
-        </a>
-
-        {/* Instagram */}
-        <a
-          className="contact-social-link"
-          href="https://www.instagram.com/rafi_siddiki/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Instagram profile"
-          title="Instagram"
-        >
-          <FaInstagram />
-        </a>
-
-        {/* GitHub */}
-        <a
-          className="contact-social-link"
-          href="https://github.com/Rafi-Siddiki"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="GitHub profile"
-          title="GitHub"
-        >
-          <FaGithub />
-        </a>
-
-        {/* LinkedIn */}
-        <a
-          className="contact-social-link"
-          href="https://www.linkedin.com/in/raf1-s1dd1k1/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="LinkedIn profile"
-          title="LinkedIn"
-        >
-          <FaLinkedinIn />
-        </a>
-
-        {/* Discord: copies your username */}
+        {/* Discord has no profile URL, so the button copies the username instead */}
         <button
           type="button"
           className="contact-social-link"
           onClick={copyDiscordUsername}
-          aria-label="Copy Discord username .rafi."
-          title="Copy Discord username"
+          aria-label={DISCORD_LINK.ariaLabel}
+          title={DISCORD_LINK.title}
         >
-          <FaDiscord />
+          <DiscordIcon />
         </button>
       </div>
 
-      {/* Feedback after clicking Discord */}
       <p className="discord-copy-message" aria-live="polite">
         {discordMessage}
       </p>

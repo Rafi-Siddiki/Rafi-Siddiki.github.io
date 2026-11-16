@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import "./ScrollReveal.css";
 
+// Fades children in the first time they scroll into view, then stops observing.
 function ScrollReveal({
   children,
   direction = "up",
@@ -12,30 +14,26 @@ function ScrollReveal({
 
   useEffect(() => {
     const element = elementRef.current;
-
     if (!element) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Runs when the element enters AND leaves the viewport.
-        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
       },
-      {
-        threshold: 0.15,
-      }
+      { threshold: 0.15 }
     );
 
     observer.observe(element);
-
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div
       ref={elementRef}
-      className={`scroll-reveal ${isVisible ? "visible" : ""} ${className}`}
+      className={`scroll-reveal ${isVisible ? "visible" : ""} ${className}`.trim()}
       data-direction={direction}
       style={{
         "--reveal-duration": `${duration}ms`,

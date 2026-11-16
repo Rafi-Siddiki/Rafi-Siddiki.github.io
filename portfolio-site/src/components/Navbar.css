@@ -220,11 +220,3 @@
 }
 
 /* Respect reduced-motion preferences */
-
-@media (prefers-reduced-motion: reduce) {
-  .menu-toggle span,
-  .nav-links a,
-  .theme-switcher button {
-    transition: none;
-  }
-}

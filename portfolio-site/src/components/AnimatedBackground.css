@@ -1,6 +1,5 @@
-
 /* =========================================
-   SHARED BACKGROUND
+   SHARED BACKGROUND LAYER
 ========================================= */
 
 .animated-background {
@@ -13,12 +12,14 @@
   background: var(--bg, #0b0d12);
 }
 
-/* Keep background behind the app content */
-
-.app {
-  position: relative;
-  isolation: isolate;
+.theme-minecraft .animated-background {
+  background: #17251b;
 }
+
+.theme-cyberpunk .animated-background {
+  background: #080613;
+}
+
 
 /* =========================================
    DEFAULT THEME: FLOATING PARTICLES
@@ -55,11 +56,14 @@
   }
 }
 
+
 /* =========================================
-   SHARED GIF BACKGROUNDS
+   ANIMATED IMAGE BACKGROUNDS
+   The still poster is set as background-image
+   so something shows while the animation loads.
 ========================================= */
 
-.background-gif {
+.background-media {
   position: absolute;
   inset: 0;
   display: block;
@@ -67,24 +71,26 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  background-size: cover;
+  background-position: center;
 }
 
-/* =========================================
-   MINECRAFT THEME
-========================================= */
-
-.theme-minecraft {
-  background: #17251b;
-}
-
-.minecraft-gif {
+.background-media--minecraft {
   opacity: 0.72;
   filter: saturate(0.9) brightness(0.85);
 }
 
-.theme-minecraft .background-overlay {
+.background-media--cyberpunk {
+  opacity: 0.7;
+  filter: saturate(1.25) contrast(1.08) brightness(0.78);
+}
+
+.background-overlay {
   position: absolute;
   inset: 0;
+}
+
+.theme-minecraft .background-overlay {
   background:
     linear-gradient(
       180deg,
@@ -92,29 +98,10 @@
       rgb(8 18 10 / 45%) 45%,
       rgb(8 18 10 / 75%) 100%
     ),
-    linear-gradient(
-      90deg,
-      rgb(8 18 10 / 20%),
-      transparent 65%
-    );
-}
-
-/* =========================================
-   CYBERPUNK THEME
-========================================= */
-
-.theme-cyberpunk {
-  background: #080613;
-}
-
-.cyberpunk-gif {
-  opacity: 0.7;
-  filter: saturate(1.25) contrast(1.08) brightness(0.78);
+    linear-gradient(90deg, rgb(8 18 10 / 20%), transparent 65%);
 }
 
 .theme-cyberpunk .background-overlay {
-  position: absolute;
-  inset: 0;
   background:
     linear-gradient(
       180deg,
@@ -122,12 +109,9 @@
       rgb(7 4 20 / 42%) 45%,
       rgb(7 4 20 / 82%) 100%
     ),
-    linear-gradient(
-      90deg,
-      rgb(7 4 20 / 40%),
-      transparent 75%
-    );
+    linear-gradient(90deg, rgb(7 4 20 / 40%), transparent 75%);
 }
+
 
 /* =========================================
    CYBERPUNK: NEON ATMOSPHERE
@@ -154,18 +138,14 @@
   top: 5%;
   right: -10%;
   background: #a855f7;
-
-  animation:
-    cyberpunk-glow-one 12s ease-in-out infinite alternate;
+  animation: cyberpunk-glow-one 12s ease-in-out infinite alternate;
 }
 
 .cyberpunk-glow-two {
   bottom: -25%;
   left: -10%;
   background: #00e5ff;
-
-  animation:
-    cyberpunk-glow-two 15s ease-in-out infinite alternate;
+  animation: cyberpunk-glow-two 15s ease-in-out infinite alternate;
 }
 
 @keyframes cyberpunk-glow-one {
@@ -201,98 +181,38 @@
 }
 
 /* Subtle futuristic scanlines */
-
 .cyberpunk-scanlines {
   position: absolute;
   inset: 0;
-
   background: repeating-linear-gradient(
     180deg,
     transparent 0px,
     transparent 3px,
     rgb(255 255 255 / 2%) 4px
   );
-
   opacity: 0.25;
 }
 
-/* =========================================
-   ACCESSIBILITY: REDUCED MOTION
-========================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .particle,
-  .cyberpunk-glow-one,
-  .cyberpunk-glow-two {
-    animation: none !important;
-  }
-
-  /* GIF animation itself cannot be stopped with CSS.
-     Hide GIFs for reduced-motion users. */
-
-  .background-gif {
-    visibility: hidden;
-  }
-
-  .cyberpunk-glow {
-    display: none;
-  }
-}
 
 /* =========================================
-   RESPONSIVE ADJUSTMENTS
+   RESPONSIVE + REDUCED MOTION
+   (the animated images are swapped for their
+   still posters in AnimatedBackground.jsx)
 ========================================= */
 
 @media (max-width: 768px) {
-  .background-gif {
-    object-position: center;
-  }
-
   .cyberpunk-glow {
     filter: blur(65px);
   }
 }
 
-/* Initial, hidden state */
-.scroll-reveal {
-  width: 100%;
-  opacity: 0;
-
-  transition:
-    opacity var(--reveal-duration, 700ms) ease,
-    transform var(--reveal-duration, 700ms) ease;
-
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-/* Starting positions based on the chosen direction */
-.scroll-reveal[data-direction="up"] {
-  transform: translateY(40px);
-}
-
-.scroll-reveal[data-direction="down"] {
-  transform: translateY(-40px);
-}
-
-.scroll-reveal[data-direction="left"] {
-  transform: translateX(40px);
-}
-
-.scroll-reveal[data-direction="right"] {
-  transform: translateX(-40px);
-}
-
-/* Visible state */
-.scroll-reveal.visible {
-  opacity: 1;
-  transform: translate(0, 0);
-}
-
-/* Respect reduced-motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  .particle,
+  .cyberpunk-glow {
+    animation: none;
+  }
+
+  .cyberpunk-glow {
+    display: none;
   }
 }

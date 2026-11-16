@@ -1,10 +1,43 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="theme-default">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/portfolio.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio-site</title>
+
+    <title>Rafi Siddiki · Software Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Rafi Siddiki, a Computer Science and Engineering graduate working across full-stack web development, DevOps, and machine learning."
+    />
+    <meta name="theme-color" content="#0f172a" />
+
+    <link rel="icon" type="image/png" href="/portfolio.png" />
+    <link rel="apple-touch-icon" href="/portfolio.png" />
+    <link rel="canonical" href="https://rafi-siddiki.github.io/" />
+
+    <!-- Link previews (LinkedIn, Facebook, Discord, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rafi-siddiki.github.io/" />
+    <meta property="og:title" content="Rafi Siddiki · Software Developer" />
+    <meta
+      property="og:description"
+      content="Full-stack web development, DevOps, and machine learning projects by Rafi Siddiki."
+    />
+    <meta property="og:image" content="https://rafi-siddiki.github.io/rafi.webp" />
+    <meta name="twitter:card" content="summary" />
+
+    <link rel="preload" as="image" href="/rafi.webp" fetchpriority="high" />
+
+    <!-- Apply the saved theme before first paint to avoid a flash of the default
+         theme. The key must match THEME_STORAGE_KEY in src/data/themes.js. -->
+    <script>
+      try {
+        var saved = localStorage.getItem("portfolio-theme");
+        if (saved && /^[a-z]+$/.test(saved)) {
+          document.documentElement.className = "theme-" + saved;
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

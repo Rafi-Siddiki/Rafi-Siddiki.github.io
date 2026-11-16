@@ -1,16 +1,54 @@
-# React + Vite
+# Rafi Siddiki — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site built with React 19 and Vite, deployed to GitHub Pages at
+<https://rafi-siddiki.github.io/>.
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install       # install dependencies
+npm run dev       # start the dev server
+npm run build     # production build into dist/
+npm run preview   # serve the production build locally
+npm run lint      # run ESLint
+```
 
-## React Compiler
+Every push to `main` builds and deploys the site through
+`.github/workflows/deploy.yml` at the repository root.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Project layout
 
-## Expanding the ESLint configuration
+```
+src/
+  main.jsx            entry point; loads global styles
+  App.jsx             page shell: background, navbar, sections, footer
+  data/               site content — edit these to update the page
+    navigation.js     section ids and nav labels
+    projects.js       project cards
+    about.js          highlights and skill groups
+    socials.js        contact links
+    themes.js         theme list (icon, browser colour, background media)
+  hooks/
+    useTheme.js               active theme, saved to localStorage
+    useActiveSection.js       highlights the nav link for the section in view
+    usePrefersReducedMotion.js
+  components/         reusable pieces, each next to its .css file
+  sections/           Home, Projects, About, Contact, each next to its .css file
+  styles/
+    themes.css        colour and font tokens per theme
+    global.css        reset, section layout, site-wide reduced-motion rule
+public/
+  backgrounds/        animated theme backgrounds (WebP) and still posters
+  icons/              theme switcher icons
+  rafi.webp           profile photo
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Common edits
+
+- **Add a project:** add an entry to `src/data/projects.js`. Put screenshots in
+  `public/projects/` and set `image`, `liveUrl` and `sourceUrl` as needed.
+- **Add a theme:** add tokens in `src/styles/themes.css`, an entry in
+  `src/data/themes.js`, and any background styles in
+  `src/components/AnimatedBackground.css`.
+- **Add a section:** add it to `src/data/navigation.js` and to `SECTIONS` in
+  `src/App.jsx`.

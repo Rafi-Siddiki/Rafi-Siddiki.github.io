@@ -219,11 +219,3 @@
 
 
 /* Respect reduced-motion preferences */
-
-@media (prefers-reduced-motion: reduce) {
-  .footer-contact-link,
-  .footer-navigation a,
-  .back-to-top {
-    transition: none;
-  }
-}
